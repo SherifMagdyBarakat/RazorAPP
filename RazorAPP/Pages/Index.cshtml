@@ -1,0 +1,48 @@
+﻿@page
+@model IndexModel
+<a class="nav-link" href="Admin/AdminPage"> Admin Portal</a>
+<h1>List of Employees</h1>
+
+<div>
+    <a class="nav-link" href="CURD/Insert">Add New Employee</a>
+</div>
+<br />
+<br />
+
+@{
+    var rows = int.Parse(ViewData["Rows"].ToString());
+    var columns = int.Parse(ViewData["Columns"].ToString());
+}
+<table>
+
+
+    @for (int rowIndex = 0; rowIndex < rows; rowIndex++)
+    {
+
+        <tr>
+            @for (int columnIndex = 0; columnIndex < columns; columnIndex++)
+            {
+                int cardIndex = columnIndex + (rowIndex * columns);
+                if (cardIndex >= @Model.e.Count())
+                    break;
+                <td>@await Html.PartialAsync("empcard", @Model.e.ElementAt(cardIndex)) </td>
+
+            }
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
